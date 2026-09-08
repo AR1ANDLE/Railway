@@ -45,3 +45,16 @@ function choicePick(func) {
 
     } while (choice !== 0 && retry !== 2)
 }
+
+
+function affTrajet() {
+    console.table(trips)
+    let choice;
+    do {
+        choice = Number(prompt('Pour Revenir au menu precedent entrer [0]'));
+        console.log('Pour Revenir au menu precedent entrer [0]')
+    } while (choice !== 0)
+    if(choice === 0) {
+        return choicePick()
+    }
+}
