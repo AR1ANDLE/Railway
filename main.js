@@ -1,4 +1,5 @@
 // Imports
+const { trips } = require('./data.js')
 const prompt = require('prompt-sync')();
 
 // Home Menu 
@@ -17,4 +18,30 @@ function homeMenu() {
         }
         console.log(`[${i + 1}] ${RMList[i]}`)
     }
+}
+
+function choicePick(func) {
+    let choice;
+    let retry = 0;
+
+    do {
+        homeMenu()
+        choice = Number(prompt('Enter une nombre de votre choix : '))
+        while (choice < 0 || choice > RMList.length || isNaN(choice)) {
+            console.log('Svp entrer une nomber valid de 0 a 7')
+            choice = Number(prompt('Enter une nombre de votre choix : '))
+            retry += 1;
+            if(retry === 2) {
+                console.log('Trop tentatives incorrect.')
+                break;
+            }
+        }
+
+        switch (choice) {
+            case 1:
+                return affTrajet();
+        }
+
+
+    } while (choice !== 0 && retry !== 2)
 }
