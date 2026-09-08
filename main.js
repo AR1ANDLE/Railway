@@ -6,7 +6,7 @@ const prompt = require('prompt-sync')();
 
 function homeMenu() {
     console.clear();
-    const RMList = ['Afficher les trajets', 'Acheter un ticket', 'Afficher les tickets', 'Annuler un ticket',
+    RMList = ['Afficher les trajets', 'Acheter un ticket', 'Afficher les tickets', 'Annuler un ticket',
     'Rechercher un ticket', 'Filtrer les trajets', 'Trier les trajets', 'Quitter']
     console.log('===================================================')
     console.log('================= Railway Manager =================')
@@ -58,3 +58,5 @@ function affTrajet() {
         return choicePick()
     }
 }
+
+choicePick()
