@@ -1,5 +1,6 @@
 // Imports
-const { trips } = require('./data.js')
+const { trips, tickets } =  require('./data.js');
+const {spChar, nums} = require('./verif.js')
 const prompt = require('prompt-sync')();
 
 // Home Menu 
@@ -45,6 +46,27 @@ function choicePick(func) {
 
     } while (choice !== 0 && retry !== 2)
 }
+
+// Ticket Buying System
+
+function checkingSystem() {
+    console.log('Choisir Votre Trajet');
+    globalThis.tripPicked;
+    let depart = prompt('De : ')
+    let arrive = prompt('A : ')
+    let trip = false
+    for (let i = 0; i < trips.length; i++) {
+        if (depart === trips[i].departure && arrive === trips[i].destination) {
+            trip = true;
+            console.table(trips[i])
+            tripPicked = trips[i]
+        }
+    }
+    if(!trip) {console.log(`Aucune trajet trouvable de ${depart} a ${arrive}.`)}
+
+    return {trip}
+}
+
 
 
 function affTrajet() {
