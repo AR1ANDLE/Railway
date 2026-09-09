@@ -67,6 +67,28 @@ function checkingSystem() {
     return {trip}
 }
 
+function confirmationSystem() {
+    let choice;
+    if (checkingSystem) {
+        choice = Number(prompt('Pour confirmer votre trajet entrer [1] : '))
+        if (choice === 1) {
+            return ticketMaker()
+        }
+    }
+    else if (!bool) {
+        let choice = 1;
+        let count = 0;
+
+        do {
+            checkingSystem()
+            choice = Number(prompt('Entrer [0] pour retourner au menu precedent ou [1] pour ressayer : '))
+        } while (choice === 1 && count < 3);
+
+        if(count >= 3) {console.log('Trop tentative incorrect.')}
+}
+
+    return choicePick();
+}
 
 
 function affTrajet() {
