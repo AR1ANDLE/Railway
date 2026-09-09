@@ -202,4 +202,16 @@ function delTicket() {
     }}
 }
 
+function searchTicket() {
+    const personTickets = []
+    let choice = prompt('Entrer le nom de passager.')
+    for(let i = 0; i < tickets.length; i++) {
+        if(tickets[i].passengerName.toUpperCase() === choice.toUpperCase()) {
+            personTickets.push(tickets[i])
+        }
+    }
+    console.table(personTickets)
+    backBtn();
+}
+
 choicePick()
