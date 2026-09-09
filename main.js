@@ -129,18 +129,6 @@ function ticketMaker(trip) {
     return;
 }
 
-
-// function ticketSync() {
-//     for (let i = 0; i < tickets.length; i++) {
-//         console.log(ticket)
-//     }
-// }
-
-// Show ticket inventory
-
-
-
-
 function choicePick() {
     let choice;
     let retry = 0;
@@ -197,10 +185,11 @@ function delTicket() {
     let choice = Number(prompt(`Entrer l'id de votre ticket : `))
     for(let i = 0; i < tickets.length; i++) {
         if (tickets[i].id === choice) {
-            console.table(tickets[i])
             choice = Number(prompt(`Confirmer l'annulation par [1] ou clicker [0] pour revenir a la page d'acceuil`))
             if(choice === 1) {
                 tickets.splice(i, 1)
+                console.log('Ticket Annuller avec success.')
+                console.table(tickets)
                 backBtn()
             }
         }
@@ -233,16 +222,21 @@ function filterTrajet() {
 }
 
 function sortTrajer(){
-    const sorted = trips
+    const sorted = [...trips]
+    let swapped = false;
     console.log('Trier par prix croissant')
 
     for (let i = 0; i < trips.length; i++) {
         for(let j = 0; j < trips.length - 1; j++) {
-            if(sorted[j].price > sorted[i].price) {
+            if(sorted[j].price > sorted[j + 1].price) {
                 let temp = sorted[j]
-                sorted[j] = sorted[i]
-                sorted[i] = temp;
+                sorted[j] = sorted[j + 1]
+                sorted[j + 1] = temp;
+                swapped = true
             }
+        }
+        if(!swapped) {
+            break;
         }
     }
     console.table(sorted)
