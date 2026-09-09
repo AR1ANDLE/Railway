@@ -169,6 +169,8 @@ function choicePick() {
                 return searchTicket();
             case 6: 
                 return filterTrajet();
+            case 7:
+                return sortTrajer();
         }
 
 
@@ -227,5 +229,23 @@ function filterTrajet() {
     console.table(filtered)
     backBtn()
 }
+
+function sortTrajer(){
+    const sorted = trips
+    console.log('Trier par prix croissant')
+
+    for (let i = 0; i < trips.length; i++) {
+        for(let j = 0; j < trips.length - 1; j++) {
+            if(sorted[j].price > sorted[i].price) {
+                let temp = sorted[j]
+                sorted[j] = sorted[i]
+                sorted[i] = temp;
+            }
+        }
+    }
+    console.table(sorted)
+    backBtn();
+}
+
 
 choicePick()
