@@ -51,7 +51,9 @@ function checkingSystem() {
         if (depart === trips[i].departure && arrive === trips[i].destination) {
             trip = true;
             console.table(trips[i])
-            if (confirmationSystem(trips[i])) { trips[i].availableSeats = trips[i].availableSeats - 1 }
+            if (confirmationSystem(trips[i])) { trips[i].availableSeats--
+                return choicePick();
+             }
             else {
                 console.log("Le trip est deja plein.")
                 do {
@@ -124,7 +126,7 @@ function ticketMaker(trip) {
     console.log()
     let x = Number(prompt(`le ticket a etez creer avec success, Clicker pour reviendre a la d'accueil.`))
 
-    return choicePick();
+    return;
 }
 
 
