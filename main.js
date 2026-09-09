@@ -90,6 +90,55 @@ function confirmationSystem() {
     return choicePick();
 }
 
+function ticketMaker() {
+    const ticket = {};
+    let name = '';
+    let id;
+    console.clear()
+        console.log('===================================================')
+        console.log('================== Tickets Maker ==================')
+        console.log('===================================================')
+        console.table(tripPicked)
+        console.log(`[0] pour annuler et retourner au menu d'acceuil`)
+        while (name === '') {
+            name = prompt('Entre Votre Nom : ')
+            if (name.length < 1) {
+                console.log('Votre nom ne doit pas etre vide.')
+                continue;
+            }
+            if(Number(name) === 0) { return homeMenu()}
+            for (let i = 0; i < name.length; i++) {
+                if (spChar.includes(name)) {
+                    console.log(`Il y'a une symbol dans votre nom ? `)
+                    name = ''
+                } if (nums.includes(name)) {
+                    console.log(`Il y'a une nombre dans votre nom ? `)
+                    name = ''
+                }
+            }
+        }
+        ticket.name = name;
+        do {
+            id = Number(prompt(`Entrer l'id de votre trip : `))
+            if(id === 0) {return homeMenu()}
+            if(id > 0 && id <= trips.length) {
+                ticket.id = id;
+                break;
+            }
+            else {
+                console.log(`id n'est pas valide`)
+            }
+        } while (id !== 0)
+    tickets.push(ticket)
+
+    function ticketSync() {
+        for(let i = 0; i < trips.length)
+    }
+
+    console.log()
+    let x = Number(prompt(`le ticket a etez creer avec success, Clicker pour reviendre a la d'accueil.`))
+    return choicePick()
+}
 
 function affTrajet() {
     console.table(trips)
