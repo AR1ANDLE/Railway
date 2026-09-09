@@ -167,6 +167,8 @@ function choicePick() {
                 return delTicket();
             case 5:
                 return searchTicket();
+            case 6: 
+                return filterTrajet();
         }
 
 
@@ -212,6 +214,18 @@ function searchTicket() {
     }
     console.table(personTickets)
     backBtn();
+}
+
+function filterTrajet() {
+    const filtered = []
+    let choice = prompt('Entrer votre ville de depart : ')
+    for (let i = 0; i < trips.length; i++) {
+        if(trips[i].departure.toUpperCase() === choice.toUpperCase()) {
+            filtered.push(trips[i])
+        }
+    }
+    console.table(filtered)
+    backBtn()
 }
 
 choicePick()
