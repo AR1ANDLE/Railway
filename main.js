@@ -1,15 +1,15 @@
 // Imports to be decided 
-const { trips, tickets } =  require('./Services/data.js');
-const {spChar, nums} = require('./Services/verif.js')
+const { trips, tickets } =  require('./databases/data.js');
+const {spChar, nums} = require('./databases/verif.js')
 const prompt = require('prompt-sync')();
 let tickId = 1;
+const RMList = ['Afficher les trajets', 'Acheter un ticket', 'Afficher les tickets', 'Annuler un ticket',
+    'Rechercher un ticket', 'Filtrer les trajets', 'Trier les trajets', 'Quitter']
 
 // Home menu
 
 function homeMenu() {
     console.clear();
-    RMList = ['Afficher les trajets', 'Acheter un ticket', 'Afficher les tickets', 'Annuler un ticket',
-    'Rechercher un ticket', 'Filtrer les trajets', 'Trier les trajets', 'Quitter']
     console.log('===================================================')
     console.log('================= Railway Manager =================')
     console.log('===================================================')
@@ -48,10 +48,10 @@ function checkingSystem() {
     let arrive = prompt('A : ')
     let trip = false
     for (let i = 0; i < trips.length; i++) {
-        if (depart === trips[i].departure && arrive === trips[i].destination) {
+        if (depart.toUpperCase() === trips[i].departure.toUpperCase() && arrive.toUpperCase() === trips[i].destination.toUpperCase()) {
             trip = true;
-            console.table(trips[i])
-            if (confirmationSystem(trips[i])) { trips[i].availableSeats--
+            if (confirmationSystem(trips[i])) { 
+                trips[i].availableSeats--;
                 return choicePick();
              }
             else {
@@ -185,16 +185,23 @@ function delTicket() {
     let choice = Number(prompt(`Entrer l'id de votre ticket : `))
     for(let i = 0; i < tickets.length; i++) {
         if (tickets[i].id === choice) {
+            noId = tickets[i].tripId
             choice = Number(prompt(`Confirmer l'annulation par [1] ou clicker [0] pour revenir a la page d'acceuil`))
             if(choice === 1) {
                 tickets.splice(i, 1)
+                for(let j = 0; j < trips.length; j++) {
+                    if (noId === trips[j].id) {
+                        trips[j].availableSeats++
+                    }
+                }
                 console.log('Ticket Annuller avec success.')
                 console.table(tickets)
                 backBtn()
             }
         }
-    
-    }}
+        
+    }
+}
 }
 
 function searchTicket() {

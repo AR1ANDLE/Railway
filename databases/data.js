@@ -179,4 +179,9 @@ const trips = [
         price: 95,
         availableSeats: 50
     }
-];
+]
+
+const tickets = []  
+
+
+module.exports = {trips, tickets}
