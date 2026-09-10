@@ -111,7 +111,7 @@ function ticketMaker() {
       tripId: id,
       price: selectedTrip.price,
       depart: selectedTrip.departure,
-      destination: selectedTrip.destination
+      destination: selectedTrip.destination,
     };
     let assignedSeat;
 
@@ -137,9 +137,17 @@ function ticketMaker() {
     selectedTrip.availableSeats--;
     tickets.push(ticket);
     tickId++;
+
+    Number(
+      prompt(
+        `Le ticket a ete cree avec succes. Appuyez sur Entree pour revenir a l'accueil.`,
+      ),
+    );
+  } else {
+    console.log("Not a valid id number");
+    return backBtn();
   }
 
-  Number(prompt(`Le ticket a ete cree avec succes. Appuyez sur Entree pour revenir a l'accueil.`))
   return choicePick();
 }
 
@@ -156,7 +164,7 @@ function choicePick() {
     }
 
     if (choice === 0) {
-        break;
+      break;
     }
     switch (choice) {
       case 1:
@@ -179,9 +187,19 @@ function choicePick() {
 
 function affTickets() {
   console.clear();
-  console.log("========================================================================")
-  console.log("=========================== Tickets ====================================")
-  console.log("========================================================================")
+  console.log(
+    "========================================================================",
+  );
+  console.log(
+    "=========================== Tickets ====================================",
+  );
+  console.log(
+    "========================================================================",
+  );
+  if (tickets.length === 0) {
+    console.log(`Vous n'avez aucune ticket`);
+    return backBtn();
+  }
   console.table(tickets);
   return backBtn();
 }
@@ -191,7 +209,6 @@ function delTicket() {
     console.log(`Vous n'avez aucun ticket.`);
     return backBtn();
   }
-
   console.table(tickets);
   let choice = Number(prompt(`Entrez l'id de votre ticket : `));
 
@@ -211,6 +228,7 @@ function delTicket() {
       }
     }
   }
+  console.log("ticket introuvable.");
   return backBtn();
 }
 
@@ -221,6 +239,10 @@ function searchTicket() {
     if (tickets[i].passengerName.toUpperCase() === choice.toUpperCase()) {
       personTickets.push(tickets[i]);
     }
+  }
+  if (personTickets.length === 0) {
+    console.log(`Vous n'avez aucune ticket`);
+    return backBtn();
   }
   console.table(personTickets);
   return backBtn();
@@ -244,7 +266,7 @@ function sortTrajer() {
 
   for (let i = 0; i < sorted.length; i++) {
     let swapped = false;
-    for (let j = 0; j < sorted.length - 1; j++) {
+    for (let j = 0; j < sorted.length - 1 - i; j++) {
       if (sorted[j].price > sorted[j + 1].price) {
         let temp = sorted[j];
         sorted[j] = sorted[j + 1];
