@@ -182,6 +182,7 @@ const trips = [
 ]
 
 const tickets = []  
+const deletedTickets = []
 
 
-module.exports = {trips, tickets}
+module.exports = {trips, tickets, deletedTickets}
